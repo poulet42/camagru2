@@ -20,7 +20,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] . "/inc/header.php");
 
                 if ($_GET['action'] == 'register') {
 
-                    include $_SERVER['DOCUMENT_ROOT'] . "/inc/register.php";
+                    include "inc/register.php";
 
                 } elseif ($_get['action'] == 'activate') {
 
@@ -30,8 +30,13 @@ include_once($_SERVER['DOCUMENT_ROOT'] . "/inc/header.php");
 
             } else {
 
-                if (isset($_GET['registration']) && $_GET['registration'] == "successful")
+                if (isset($_GET['registration']))
+                {
+                  if ($_GET['registration'] == "successful" && $user->isActivated())
+                    echo "Compte activé, vous pouvez maintenant vous connecter !";
+                  elseif ($_GET['registration'] == "notactivated")
                     echo "Inscription complete, veuillez activer votre compte pour vous connecter";
+                }
                 include $_SERVER['DOCUMENT_ROOT'] . "/inc/login.php";
 
             }

@@ -6,6 +6,7 @@
  * Date: 07/08/2016
  * Time: 20:46
  */
+/*
 class Session
 {
     static $sessionbool;
@@ -18,4 +19,4 @@ class Session
     {
         session_start();
     }
-}
+}*/

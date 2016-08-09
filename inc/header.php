@@ -1,5 +1,5 @@
 <?php
-require ($_SERVER['DOCUMENT_ROOT'] . "/inc/appstart.php");
+require ("inc/appstart.php");
 require_once ('inc/funcs/dbconnect.php');
 ?>
 <!DOCTYPE html>
