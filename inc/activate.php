@@ -1,4 +1,6 @@
 <?php
 if (!empty($_POST['hash'])) {
-  $user->activate($_POST['hash'])->redirectTo('form.php?action=successful');
+  if ($user->activate($_GET['user'], $_GET['hash']))
+    $user->redirectTo('form.php?action=successful');
+  $user->getErrors();
 }

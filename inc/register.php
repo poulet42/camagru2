@@ -14,15 +14,15 @@ if (isset($_POST['register'])) {
     ->add("mail", ["minlen" => 5, "regex" => '^[a-zA-Z0-9._-]+\@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', "errname" => "Email"])
     ->add("password", ['minlen' => 6, 'regex' => '^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\*\!\-\_\&\%\$]+$', "errname" => "Mot de passe"]);
 
-
-  if (!$user->exists($_POST['register']['username'], $_POST['register']['mail']))
+  if ($user->exists($_POST['register']['username'], $_POST['register']['mail']))
     $validation->addCustomError("L'utilisateur existe déjà");
   if ($validation->validate())
-    $user->register($_POST['register']['username'], $_POST['register']['password'], $_POST['register']['mail'])->redirectTo('form.php?registration=notactivated');
-  else {
-    echo "LOL NOPE";
-    $errors = $validation->getErrors();
+  {
+    $auth->register($_POST['register']['username'], $_POST['register']['mail'], $_POST['register']['password']);
+    $user->redirectTo('form.php?registration=notactivated');
   }
+  else
+    $errors = $validation->getErrors();
 }
 if (!empty($errors)): ?>
 
@@ -58,7 +58,7 @@ if (!empty($errors)): ?>
   <div class="tooltip-wrap">
     <input type="password" id="password" class='ftext has-tooltip' name="register[password]"
            placeholder="Mot de passe" required>
-    <span class="tooltip">Votre mot de passe doit contenir plus de 6 caractères</span>
+    <span class="tooltip">Votre mot de passe doit faire plus de 6 caractères et contenir au moins un chiffre.</span>
   </div>
 
   <div class="tooltip-wrap">

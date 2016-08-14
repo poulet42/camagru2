@@ -45,24 +45,30 @@
   }, false);
 
   function takepicture() {
+
     canvas.width = width;
     canvas.height = height;
     canvas.getContext('2d').drawImage(video, 0, 0, width, height);
     var data = canvas.toDataURL('image/png');
-    photo.setAttribute('src', data);
-    xhr.open("POST", "inc/funcs/imgprocess.php", true);
+    var sweg = document.querySelector('#swegs').value;
+    var sweg2 = document.querySelector('#sweg2').value;
+    //photo.setAttribute('src', data);
+    //photo.setAttribute('src', '/img/temp.png');
+    xhr.open("POST", "/inc/test2.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-    xhr.send("img=" + encodeURIComponent(data));
+    xhr.send("img=" + encodeURIComponent(data) + "&dstx=" + sweg + "&dsty=" + sweg2);
   }
 
   startbutton.addEventListener('click', function(ev){
     takepicture();
     ev.preventDefault();
   }, false);
-    
+
     xhr.onreadystatechange = function() {
 	if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
-		photo.setAttribute('src', "http://localhost:8080/camagru/inc/funcs/imgprocess.php");
+		photo.setAttribute('src', "inc/test.png?" + new Date().getTime());
+    //photo.setAttribute('onmousemove', "filtermove(event)");
+    console.log(xhr.responseText);
 	}
 };
 })();

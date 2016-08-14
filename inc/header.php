@@ -22,22 +22,22 @@ require_once ('inc/funcs/dbconnect.php');
         </span>
       </div>
       <ul class='primary-nav'>
-        <?php if (isset($_SESSION['loggued_user'])): ?>
+        <?php if ($user->connected()): ?>
             <li class="nav-entry nav-entry--full-width">
                 <label for="user-head-toggle" class="nav-entry-link user-head-link">
-                    <img class="user-head-thumb" src="img/default-avatar.svg">
-                    <span class="user-head-name"><?= $_SESSION['loggued_user'] ?></span>
+                    <img class="user-head-thumb" src="<?= $user->getAvatar() ?>">
+                    <span class="user-head-name"><?= $user->getLogin() ?></span>
                 </label>
                 <input type="checkbox" id="user-head-toggle" />
                 <ul class='user-head-submenu'>
                     <li class="user-head-submenu-entry">Mon compte</li>
-                    <li class="user-head-submenu-entry"><a class="user-head-submenu-link" href="logout.php">Déconnexion</a></li>
+                    <li class="user-head-submenu-entry"><a class="user-head-submenu-link" href="<?= LOGOUT ?>">Déconnexion</a></li>
                 </ul>
             </li>
 
         <?php else: ?>
-            <li class="nav-entry"><a href="/form.php" class="nav-entry-link header-btn">Login</a></li>
-            <li class="nav-entry"><a href="/form.php?action=register" class="nav-entry-link header-btn">Register</a></li>
+            <li class="nav-entry"><a href="<?= LOGIN ?>" class="nav-entry-link header-btn">Login</a></li>
+            <li class="nav-entry"><a href="<?= REGISTER ?>" class="nav-entry-link header-btn">Register</a></li>
         <?php endif; ?>
 
       </ul>

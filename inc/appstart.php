@@ -2,7 +2,7 @@
 spl_autoload_register("camagru_autoload");
 
 function camagru_autoload($class) {
-  require "Classes/$class.Class.php";
+  require $_SERVER['DOCUMENT_ROOT'] . "/Classes/$class.Class.php";
 }
 
 function rine(&$a, $default = "") {

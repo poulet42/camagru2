@@ -1,5 +1,4 @@
 <?php
-session_start();
-unset($_SESSION['loggued_user']); 
-header('Location: login.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . "/inc/header.php");
+$user->logout()->redirectTo(HOME);
 ?>
